@@ -1,0 +1,38 @@
+server:
+  port: 8015
+spring:
+  #mongo
+  data:
+    mongodb:
+      auto-index-creation: true
+      #docker container name
+      database: weatherbot
+      host: localhost
+      port: 27017
+      username: 'admin'
+      password: '123456'
+#actulator
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+          - caches
+          - beans
+app:
+  name: weatherbot
+  version: 1.0.0
+task:
+  weather:
+    notification-hour: 10
+    save-hour: 23
+location:
+  time-zone: GMT+9
+  latitude: 60.3743000
+  longitude: 120.4203000
+  name: Олекминск
+telegram: ${token}
+yandex-weather: ${api-key}

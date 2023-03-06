@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  db:
+    image: mongo:5.0.10
+    restart: always
+    container_name: weatherbot_db
+    environment:
+      - MONGO_INITDB_DATABASE=weatherbot
+      - MONGO_INITDB_ROOT_USERNAME=root #root username
+      - MONGO_INITDB_ROOT_PASSWORD=password #root password
+    ports:
+      - '27017:27017' #external port to connect from IDEA
+    volumes:
+      - ./data/mongodb:/data/db #database
+      - ./scripts/create-user.js:/docker-entrypoint-initdb.d/create-user.js:ro #copy to container folder init js file
+    networks:
+      - weather-network
+networks:
+  weather-network:
+    driver: bridge
